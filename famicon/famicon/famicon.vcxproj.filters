@@ -27,6 +27,12 @@
     <Filter Include="ライブラリ用ソースファイル">
       <UniqueIdentifier>{e93d6900-d129-4c3f-acbd-1f8be7236993}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\オブジェクト\ブロック">
+      <UniqueIdentifier>{d0547f8a-f661-44fe-be42-43f64985e5d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\オブジェクト\ブロック">
+      <UniqueIdentifier>{f5c3d624-64f9-4ddc-a98c-c170a1bd5e1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -62,6 +68,18 @@
     <ClInclude Include="function.h">
       <Filter>ライブラリ用ヘッダーファイル</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>ヘッダー ファイル\オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ground.h">
+      <Filter>ヘッダー ファイル\オブジェクト\ブロック</Filter>
+    </ClInclude>
+    <ClInclude Include="scaf.h">
+      <Filter>ヘッダー ファイル\オブジェクト\ブロック</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +99,18 @@
     </ClCompile>
     <ClCompile Include="library_function.cpp">
       <Filter>ライブラリ用ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>ソース ファイル\オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ground.cpp">
+      <Filter>ソース ファイル\オブジェクト\ブロック</Filter>
+    </ClCompile>
+    <ClCompile Include="scaf.cpp">
+      <Filter>ソース ファイル\オブジェクト\ブロック</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

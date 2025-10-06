@@ -14,8 +14,14 @@ using namespace std;
 #define RADIAN(_deg) ((float)M_PI*(_deg)/180.0f)
 
 //基本ウィンドウサイズ
-constexpr auto WINDOW_WIDTH = 800;	//横幅
-constexpr auto WINDOW_HEIGHT = 600;	//縦幅
+constexpr auto WINDOW_WIDTH = 512;	//横幅
+constexpr auto WINDOW_HEIGHT = 448;	//縦幅
+
+constexpr auto MAP_WIDTH = 32;
+constexpr auto MAP_HEIGHT = 28;
+
+constexpr auto BLOCK_WIDTH = 16;
+constexpr auto BLOCK_HEIGHT = 16;
 
 //2D用
  struct Point {
@@ -35,6 +41,21 @@ struct Vector3 {
  struct ObjSize {
 	float h, w, d;
 };
+
+ enum ID
+ {
+	 PLAYER,
+	 GROUND,
+	 SCAF,
+	 ID_END
+ };
+
+ enum BLOCK
+ {
+	 BGROUND,
+	 BSCAF,
+	 BLOCK_END
+ };
 
 //カメラ情報クラス(main.h)
 //class CCameraInfo {

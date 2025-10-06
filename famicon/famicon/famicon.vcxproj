@@ -158,10 +158,14 @@
     <ClInclude Include="2D_function.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="ground.h" />
     <ClInclude Include="library_function.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="objBase.h" />
     <ClInclude Include="objChar.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="scaf.h" />
     <ClInclude Include="Scene_Base.h" />
     <ClInclude Include="Scene_Manager.h" />
   </ItemGroup>
@@ -170,8 +174,12 @@
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="2D_function.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="ground.cpp" />
     <ClCompile Include="library_function.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="scaf.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
