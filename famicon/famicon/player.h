@@ -11,5 +11,8 @@ public:
 
 	float SPEED{ 4.0f };
 
-	float g{ 2.0f };
+	float g{ 0.5f };
+
+	bool Jump{ false };
+	bool OnGround{ false };
 };
