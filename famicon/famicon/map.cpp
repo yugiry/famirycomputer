@@ -55,7 +55,7 @@ CMap::CMap(vector<unique_ptr<BaseVector>>& base)
 	{
 		for (int x = 0; x < MAP_WIDTH; x++)
 		{
-			Point p{ x * BLOCK_WIDTH,y * BLOCK_HEIGHT };
+			Point p{ (x - 1) * BLOCK_WIDTH,y * BLOCK_HEIGHT };
 			switch (map[x + y * MAP_WIDTH])
 			{
 			case 0:

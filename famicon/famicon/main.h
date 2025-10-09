@@ -17,7 +17,7 @@ using namespace std;
 constexpr auto WINDOW_WIDTH = 512;	//â°ïù
 constexpr auto WINDOW_HEIGHT = 448;	//ècïù
 
-constexpr auto MAP_WIDTH = 32;
+constexpr auto MAP_WIDTH = 34;
 constexpr auto MAP_HEIGHT = 28;
 
 constexpr auto BLOCK_WIDTH = 16;

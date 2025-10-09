@@ -1,4 +1,5 @@
 ﻿  player.cpp
-C:\Users\GA2A\Desktop\fami\famicon\famicon\player.cpp(72,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\GA2A\Desktop\fami\famicon\famicon\player.cpp(72,15): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\fami\famicon\famicon\player.cpp(75,11): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\fami\famicon\famicon\player.cpp(86,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\fami\famicon\famicon\player.cpp(86,15): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   famicon.vcxproj -> C:\Users\GA2A\Desktop\fami\famicon\x64\Debug\famicon.exe
