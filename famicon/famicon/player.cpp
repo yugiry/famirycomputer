@@ -22,8 +22,20 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 	//xベクトルと歩くアニメーションを０にする
 	if (!CheckHitKey(KEY_INPUT_A) && !CheckHitKey(KEY_INPUT_D) && OnGround)
 	{
-		vec.x = 0;
 		walk_anim = 0;
+
+		if (vec.x > 0)
+		{
+			vec.x += -add_speed;
+			CutX = 0;
+			CutY = 48;
+		}
+		if (vec.x < 0)
+		{
+			vec.x += add_speed;
+			CutX = 0;
+			CutY = 48;
+		}
 	}
 	vec.y += g;
 
@@ -132,22 +144,22 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 	//歩きアニメーション
 	else
 	{
-		if (walk_anim == 0)
+		if (walk_anim == 0 && vec.x == 0.0f)
 		{
 			CutX = 0;
 			CutY = 0;
 		}
-		if (walk_anim == 5)
+		if (walk_anim == 2)
 		{
 			CutX = 32;
 			CutY = 0;
 		}
-		if (walk_anim == 10)
+		if (walk_anim == 4)
 		{
 			CutX = 64;
 			CutY = 0;
 		}
-		if (walk_anim == 15)
+		if (walk_anim == 6)
 		{
 			CutX = 96;
 			CutY = 0;

@@ -9,7 +9,7 @@ public:
 	int Action(vector<unique_ptr<BaseVector>>&);
 	void Draw();
 
-	float add_speed{ 0.2f };
+	float add_speed{ 0.25f };
 	float SPEED{ 2.0f };
 
 	float g{ 0.5f };
