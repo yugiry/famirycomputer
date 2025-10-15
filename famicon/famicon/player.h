@@ -16,4 +16,8 @@ public:
 
 	bool Jump{ false };
 	bool OnGround{ false };
+
+	int walk_anim{ false };
+
+	bool direction{ false };
 };
