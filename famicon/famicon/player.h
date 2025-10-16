@@ -20,4 +20,7 @@ public:
 	int walk_anim{ false };
 
 	bool direction{ false };
+
+	bool death{ false };
+	int fall_time{ 0 };
 };

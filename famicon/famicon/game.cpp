@@ -6,12 +6,16 @@
 
 #include "player.h"
 #include "map.h"
+#include "turtle.h"
+
 
 //コンストラクタ
 CGame::CGame(CManager* p) :CScene(p){
 	base.emplace_back((unique_ptr<BaseVector>)new CMap(base));
 	Point pos{ 0,0 };
 	base.emplace_back((unique_ptr<BaseVector>)new CPlayer(pos));
+	pos.x = WINDOW_WIDTH - 32;
+	base.emplace_back((unique_ptr<BaseVector>)new CTurtle(pos));
 }
 
 //更新処理

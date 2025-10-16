@@ -22,6 +22,7 @@ void DrawNum(int, int, int, int, int, int);
 //リストから指定オブジェクトの取得
 Base* Get_obj(list<unique_ptr<Base>>&, int);
 Base3D* Get_obj(list<unique_ptr<Base3D>>&, int);
+BaseVector* Get_obj(vector<unique_ptr<Base3D>>&, int);
 
 //指定したオブジェクトの座標取得
 Point Get_Point(list<unique_ptr<Base>>&, int);

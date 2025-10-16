@@ -112,6 +112,19 @@ Base3D* Get_obj(list<unique_ptr<Base3D>>& base, int ID)
 	return nullptr;
 }
 
+//リストから指定オブジェクトの取得
+BaseVector* Get_obj(vector<unique_ptr<BaseVector>>& base, int ID)
+{
+	for (auto i = base.begin(); i != base.end(); i++)
+	{
+		if ((*i)->ID == ID)
+		{
+			return (*i).get();
+		}
+		return nullptr;
+	}
+}
+
 //指定したオブジェクトの座標取得
 Point Get_Point(list<unique_ptr<Base>>& base, int ID)
 {
