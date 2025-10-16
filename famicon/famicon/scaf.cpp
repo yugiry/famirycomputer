@@ -14,6 +14,11 @@ CScaf::CScaf(Point p)
 
 int CScaf::Action(vector<unique_ptr<BaseVector>>& base)
 {
+	pos.y += vec.y;
+
+	if (vec.y == -10.0f)vec.y = 10.0f;
+	else if (vec.y == 10.0f)vec.y = 0;
+
 	return 0;
 }
 

@@ -108,10 +108,11 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 					OnGround = true;
 					break;
 				}
+				//下から叩かれた時
 				if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y + (*i)->ImgWidth - 10, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y < 0)
 				{
 					vec.y = 0;
-					break;
+					(*i)->vec.y = -10.0f;
 				}
 			}
 		}
@@ -144,7 +145,20 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 	}
 	else
 	{
+		if (fall_time != 0)fall_time--;
+		if (fall_time == 1)
+		{
+			vec.y = -8.0f;
+			CutX = 96;
+			CutY = 48;
+		}
+		if (fall_time == 0)vec.y += g;
 
+		if (pos.y + ImgHeight < WINDOW_HEIGHT)
+		{
+			//水しぶきを発生
+
+		}
 	}
 
 	//画面端に行ったとき、反対側の画面端から出るようにする
