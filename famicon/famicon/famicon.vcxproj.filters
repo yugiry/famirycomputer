@@ -89,6 +89,9 @@
     <ClInclude Include="turtle.h">
       <Filter>ヘッダー ファイル\オブジェクト\敵</Filter>
     </ClInclude>
+    <ClInclude Include="pipe.h">
+      <Filter>ヘッダー ファイル\オブジェクト\ブロック</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -123,6 +126,9 @@
     </ClCompile>
     <ClCompile Include="turtle.cpp">
       <Filter>ソース ファイル\オブジェクト\敵</Filter>
+    </ClCompile>
+    <ClCompile Include="pipe.cpp">
+      <Filter>ソース ファイル\オブジェクト\ブロック</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

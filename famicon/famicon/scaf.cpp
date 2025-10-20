@@ -3,11 +3,13 @@
 
 CScaf::CScaf(Point p)
 {
-	pos = p;
+	set_pos = pos = p;
 	img = LoadGraph("image\\scaf.png");
 
 	ImgWidth = BLOCK_WIDTH;
 	ImgHeight = BLOCK_HEIGHT;
+
+	vec.y = 0;
 
 	ID = SCAF;
 }
@@ -15,9 +17,15 @@ CScaf::CScaf(Point p)
 int CScaf::Action(vector<unique_ptr<BaseVector>>& base)
 {
 	pos.y += vec.y;
+	if (pos.y != set_pos.y)
+		vec.y += 0.5f;
 
-	if (vec.y == -10.0f)vec.y = 10.0f;
-	else if (vec.y == 10.0f)vec.y = 0;
+	//Œ»Ý‚ÌˆÊ’u‚©‚ç
+	if (pos.y > set_pos.y)
+	{
+		vec.y = 0.0f;
+		pos.y = set_pos.y;
+	}
 
 	return 0;
 }

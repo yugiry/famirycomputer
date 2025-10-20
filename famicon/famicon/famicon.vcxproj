@@ -164,6 +164,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="objBase.h" />
     <ClInclude Include="objChar.h" />
+    <ClInclude Include="pipe.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="scaf.h" />
     <ClInclude Include="Scene_Base.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="library_function.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="pipe.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="scaf.cpp" />
     <ClCompile Include="turtle.cpp" />

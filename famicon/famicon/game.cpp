@@ -7,7 +7,7 @@
 #include "player.h"
 #include "map.h"
 #include "turtle.h"
-
+#include "pipe.h"
 
 //コンストラクタ
 CGame::CGame(CManager* p) :CScene(p){
@@ -16,6 +16,11 @@ CGame::CGame(CManager* p) :CScene(p){
 	base.emplace_back((unique_ptr<BaseVector>)new CPlayer(pos));
 	pos.x = WINDOW_WIDTH - 32;
 	base.emplace_back((unique_ptr<BaseVector>)new CTurtle(pos));
+
+	//土管生成
+	{
+		base.emplace_back((unique_ptr<BaseVector>)new CPipe());
+	}
 }
 
 //更新処理

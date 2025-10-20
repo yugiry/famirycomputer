@@ -8,4 +8,6 @@ public:
 
 	int Action(vector<unique_ptr<BaseVector>>&);
 	void Draw();
+
+	Point set_pos;
 };

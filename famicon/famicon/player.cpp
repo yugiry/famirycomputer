@@ -111,8 +111,8 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 				//‰º‚©‚ç’@‚©‚ê‚½Žž
 				if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y + (*i)->ImgWidth - 10, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y < 0)
 				{
-					vec.y = 0;
-					(*i)->vec.y = -10.0f;
+					vec.y = -0.5f;
+					(*i)->vec.y = -2.5f;
 				}
 			}
 		}
@@ -135,9 +135,11 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 						fall_time = 30;
 						break;
 					}
-					else
+					else if(!turtle->kick_off)
 					{
-
+						(*i)->vec.x = vec.x;
+						(*i)->vec.y = -8.0f;
+						turtle->kick_off = true;
 					}
 				}
 			}
