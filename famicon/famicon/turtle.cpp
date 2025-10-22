@@ -26,7 +26,7 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 	vec.y += g;
 	anim_time++;
 
-	if (fallup_time >= 600)
+	if (fallup_time == 600)
 	{
 		level++;
 		fall_down = false;
