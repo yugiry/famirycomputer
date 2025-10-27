@@ -4,11 +4,13 @@
 class CPipe :public BaseVector
 {
 public:
-	//座標、向き
-	CPipe(Point, bool);
+	//座標、種類
+	CPipe(Point, int);
 
 	int Action(vector<unique_ptr<BaseVector>>&);
 	void Draw();
 
-	bool turn{ false };		//false->左、true->右
+	int type{ -1 };
+
+	Point hit{ 0,0 };
 };

@@ -16,6 +16,8 @@ CPlayer::CPlayer(Point p)
 	CutY = 0;
 
 	ID = PLAYER;
+
+	pri = 5;
 }
 
 int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)

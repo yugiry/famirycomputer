@@ -18,5 +18,7 @@ public:
 
 	bool fall_down{ false };	//倒れているかどうか
 	bool kick_off{ false };		//蹴られたかどうか
-	bool turn{ false };			//false->右、true->左
+	bool turn{ false };			//true->右、false->左
+
+	bool pipe_in{ false };
 };

@@ -12,6 +12,8 @@ CScaf::CScaf(Point p)
 	vec.y = 0;
 
 	ID = SCAF;
+
+	pri = 0;
 }
 
 int CScaf::Action(vector<unique_ptr<BaseVector>>& base)

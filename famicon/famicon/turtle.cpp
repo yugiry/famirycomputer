@@ -19,11 +19,14 @@ CTurtle::CTurtle(Point p)
 	fall_down = false;
 
 	ID = TURTLE;
+
+	pri = 2;
 }
 
 int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 {
-	vec.y += g;
+	if (!pipe_in)
+		vec.y += g;
 	anim_time++;
 
 	if (fallup_time == 600)
@@ -65,9 +68,12 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 						if (fall_down)
 						{
 							vec.y = -7.0f;
-							vec.x = -speed;
+							vec.x = -speed * 3;;
 							pos.y = (*i)->pos.y - ImgHeight;
 							fall_down = false;
+							fallup_time = 0;
+							anim_time = 0;
+							level++;
 						}
 						else
 						{
@@ -103,8 +109,16 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 		}
 	}
 
-	pos.x += vec.x;
-	pos.y += vec.y;
+	if (!turn)
+	{
+		pos.x += vec.x;
+		pos.y += vec.y;
+	}
+	else
+	{
+		pos.x -= vec.x;
+		pos.y += vec.y;
+	}
 
 	if (!fall_down)
 	{
@@ -175,5 +189,8 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 
 void CTurtle::Draw()
 {
-	DrawRectGraph(pos.x, pos.y, CutX, CutY, ImgWidth, ImgHeight, img, true, false);
+	if (!turn)
+		DrawRectGraph(pos.x, pos.y, CutX, CutY, ImgWidth, ImgHeight, img, true, false);
+	else
+		DrawRectGraph(pos.x, pos.y, CutX, CutY, ImgWidth, ImgHeight, img, true, true);
 }

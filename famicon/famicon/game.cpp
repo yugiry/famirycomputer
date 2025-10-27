@@ -19,7 +19,14 @@ CGame::CGame(CManager* p) :CScene(p){
 
 	//ìyä«ê∂ê¨
 	{
-		base.emplace_back((unique_ptr<BaseVector>)new CPipe());
+		pos.x = 0; pos.y = WINDOW_HEIGHT - 85;
+		base.emplace_back((unique_ptr<BaseVector>)new CPipe(pos, 0));
+		pos.x = WINDOW_WIDTH - 64;
+		base.emplace_back((unique_ptr<BaseVector>)new CPipe(pos, 1));
+		pos.x = 0; pos.y = 40;
+		base.emplace_back((unique_ptr<BaseVector>)new CPipe(pos, 2));
+		pos.x = WINDOW_WIDTH - 112;
+		base.emplace_back((unique_ptr<BaseVector>)new CPipe(pos, 3));
 	}
 }
 

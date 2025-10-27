@@ -10,6 +10,8 @@ CGround::CGround(Point p)
 	ImgHeight = BLOCK_HEIGHT;
 
 	ID = GROUND;
+
+	pri = 0;
 }
 
 int CGround::Action(vector<unique_ptr<BaseVector>>& base)

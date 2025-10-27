@@ -47,6 +47,7 @@ struct Vector3 {
 	 PLAYER,
 	 GROUND,
 	 SCAF,
+	 PIPE,
 	 TURTLE,
 	 ID_END
  };
