@@ -23,5 +23,8 @@ public:
 	int Update();//更新処理
 	void Draw();//描画処理
 
+	int Espawn_time{ 0 };
+	int spawn_cool{ 200 };
+
 	//CCamera* camera;//カメラオブジェクト
 };

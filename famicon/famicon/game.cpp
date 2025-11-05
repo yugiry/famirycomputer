@@ -15,7 +15,7 @@ CGame::CGame(CManager* p) :CScene(p){
 	Point pos{ 0,0 };
 	base.emplace_back((unique_ptr<BaseVector>)new CPlayer(pos));
 	pos.x = WINDOW_WIDTH - 32;
-	base.emplace_back((unique_ptr<BaseVector>)new CTurtle(pos));
+	//base.emplace_back((unique_ptr<BaseVector>)new CTurtle(pos));
 
 	//土管生成
 	{
@@ -32,6 +32,16 @@ CGame::CGame(CManager* p) :CScene(p){
 
 //更新処理
 int CGame::Update(){
+
+	if (Espawn_time == 0)
+		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(true));
+	else if(Espawn_time == spawn_cool)
+		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(false));
+	else if(Espawn_time == spawn_cool * 3)
+		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(false));
+
+	Espawn_time++;
+
 	//更新処理
 	for (int i = 0; i < base.size(); i++)
 		base[i]->Action(base);

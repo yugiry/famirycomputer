@@ -27,7 +27,7 @@ CPipe::CPipe(Point p, int _type)
 
 	if (type == 0)
 	{
-		hit.x = pos.x + ImgWidth;
+		hit.x = pos.x + ImgWidth - 10;
 		hit.y = pos.y;
 	}
 	if (type == 1)
@@ -52,8 +52,7 @@ int CPipe::Action(vector<unique_ptr<BaseVector>>& base)
 			{
 				if (HitCheck_box(hit.x, hit.y, base[i]->pos.x, base[i]->pos.y, 10, ImgHeight, base[i]->ImgWidth, base[i]->ImgHeight))
 				{
-
-					base[i]->vec.y = -1.0f;
+					turtle->in_pipe = true;
 				}
 			}
 		}

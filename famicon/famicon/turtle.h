@@ -4,7 +4,7 @@
 class CTurtle :public BaseVector
 {
 public:
-	CTurtle(Point);
+	CTurtle(bool);
 
 	int Action(vector<unique_ptr<BaseVector>>&);
 	void Draw();
@@ -18,7 +18,9 @@ public:
 
 	bool fall_down{ false };	//倒れているかどうか
 	bool kick_off{ false };		//蹴られたかどうか
-	bool turn{ false };			//true->右、false->左
-
-	bool pipe_in{ false };
+	bool turn{ false };			//顔の向き：true->右、false->左
+	bool in_pipe{ false };		//土管に入っている
+	bool respawn{ false };		//上の土管に戻る判定
+	bool spawn{ false };		//スポーン
+	bool turn_anim{ false };
 };
