@@ -92,6 +92,9 @@
     <ClInclude Include="pipe.h">
       <Filter>ヘッダー ファイル\オブジェクト\ブロック</Filter>
     </ClInclude>
+    <ClInclude Include="pow.h">
+      <Filter>ヘッダー ファイル\オブジェクト\ブロック</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +131,9 @@
       <Filter>ソース ファイル\オブジェクト\敵</Filter>
     </ClCompile>
     <ClCompile Include="pipe.cpp">
+      <Filter>ソース ファイル\オブジェクト\ブロック</Filter>
+    </ClCompile>
+    <ClCompile Include="pow.cpp">
       <Filter>ソース ファイル\オブジェクト\ブロック</Filter>
     </ClCompile>
   </ItemGroup>

@@ -49,6 +49,7 @@ struct Vector3 {
 	 SCAF,
 	 PIPE,
 	 TURTLE,
+	 POW,
 	 ID_END
  };
 

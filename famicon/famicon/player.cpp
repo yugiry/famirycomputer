@@ -1,6 +1,7 @@
 #pragma once
 #include "player.h"
 #include "turtle.h"
+#include "pow.h"
 #include "function.h"
 
 CPlayer::CPlayer(Point p)
@@ -115,6 +116,32 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 				{
 					vec.y = -0.5f;
 					(*i)->vec.y = -2.5f;
+				}
+			}
+			if ((*i)->ID == POW)
+			{
+				if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y > 0)
+				{
+					vec.y = 0;
+					pos.y = (*i)->pos.y - ImgHeight;
+					OnGround = true;
+					break;
+				}
+				if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y + (*i)->ImgWidth - 10, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y < 0)
+				{
+					CPow* pow = (CPow*)(*i).get();
+					pow->plosion_time--;
+					vec.y = 0;
+					for (int j = 0; j < base.size(); j++)
+					{
+						if (base[j]->ID == TURTLE)
+						{
+							CTurtle* turtle = (CTurtle*)base[j].get();
+							turtle->fall_down = true;
+							turtle->vec.y = -7.0f;
+							turtle->vec.x = 0;
+						}
+					}
 				}
 			}
 		}

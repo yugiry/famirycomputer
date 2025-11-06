@@ -255,14 +255,18 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 		{
 			if (anim_time < 10)
 			{
-				CutY = 160;
+				CutX = 160;
 			}
 			else if (anim_time < 20)
 			{
 				if (turn)turn = false;
 				else turn = true;
 			}
-			else if (anim_time == 30)turn_anim = false;
+			else if (anim_time == 30)
+			{
+				turn_anim = false;
+				anim_time = 0;
+			}
 		}
 		//アニメーション関係
 		else

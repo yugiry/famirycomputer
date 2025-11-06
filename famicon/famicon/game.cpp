@@ -8,14 +8,18 @@
 #include "map.h"
 #include "turtle.h"
 #include "pipe.h"
+#include "pow.h"
 
 //コンストラクタ
 CGame::CGame(CManager* p) :CScene(p){
 	base.emplace_back((unique_ptr<BaseVector>)new CMap(base));
-	Point pos{ 0,0 };
+	Point pos{ 128,WINDOW_HEIGHT - 80 };
 	base.emplace_back((unique_ptr<BaseVector>)new CPlayer(pos));
 	pos.x = WINDOW_WIDTH - 32;
 	//base.emplace_back((unique_ptr<BaseVector>)new CTurtle(pos));
+
+	pos.x = WINDOW_WIDTH / 2; pos.y = WINDOW_HEIGHT / 2;
+	base.emplace_back((unique_ptr<BaseVector>)new CPow(pos));
 
 	//土管生成
 	{
