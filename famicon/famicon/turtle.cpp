@@ -12,17 +12,17 @@ CTurtle::CTurtle(bool _turn)
 	CutX = 0;
 	CutY = 0;
 
-	vec.x = -speed;
-
 	turn = _turn;
 
 	if (!turn)
 	{
 		pos = { float((WINDOW_WIDTH - 112) + ImgWidth),48 };
+		vec.x = -speed;
 	}
 	else
 	{
 		pos = { float(112 - ImgWidth),48 };
+		vec.x = speed;
 	}
 
 	spawn = true;
@@ -133,6 +133,7 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 						in_pipe = respawn = false;
 					}
 				}
+				vec.x = -vec.x;
 			}
 		}
 		else
@@ -143,7 +144,10 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 				level++;
 				fall_down = false;
 				fallup_time = 0;
-				vec.x = -speed * 3;
+				if (!turn)
+					vec.x = -speed * 3;
+				else
+					vec.x = speed * 3;
 				anim_time = 0;
 			}
 
@@ -178,7 +182,10 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 								if (fall_down)
 								{
 									vec.y = -7.0f;
-									vec.x = -speed * 3;;
+									if (!turn)
+										vec.x = -speed * 3;
+									else
+										vec.x = speed * 3;
 									pos.y = (*i)->pos.y - ImgHeight;
 									fall_down = false;
 									fallup_time = 0;
@@ -206,6 +213,33 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 				}
 			}
 
+			if (!fall_down)
+			{
+				for (int i = 0; i < base.size(); i++)
+				{
+					if (base[i]->ID == TURTLE)
+					{
+						if (pos.x != base[i]->pos.x || pos.y != base[i]->pos.y)
+							if (HitCheck_box(pos.x + vec.x, pos.y + vec.y, base[i]->pos.x + base[i]->vec.x, base[i]->pos.y + base[i]->vec.y, ImgWidth, ImgHeight))
+							{
+								CTurtle* turtle = (CTurtle*)base[i].get();
+								if (!turn_anim)
+								{
+									turn_anim = true;
+									anim_time = 0;
+									pos.x -= vec.x;
+									if (!turtle->fall_down)
+									{
+										turtle->turn_anim = true;
+										turtle->anim_time = 0;
+										turtle->pos.x -= turtle->vec.x;
+									}
+								}
+							}
+					}
+				}
+			}
+
 			//画面端に行ったとき、反対側の画面端から出るようにする
 			if (!kick_off)
 			{
@@ -222,47 +256,37 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 			//向きによって移動方向を変更
 			if (!turn_anim)
 			{
-				if (!turn)
-				{
-					pos.x += vec.x;
-					pos.y += vec.y;
-				}
-				else
-				{
-					pos.x -= vec.x;
-					pos.y += vec.y;
-				}
-			}
-		}
-
-		for (int i = 0; i < base.size(); i++)
-		{
-			if (base[i]->ID == TURTLE)
-			{
-				if (pos.x != base[i]->pos.x || pos.y != base[i]->pos.y)
-					if (HitCheck_box(pos.x + vec.x, pos.y + vec.y, base[i]->pos.x + base[i]->vec.x, base[i]->pos.y + base[i]->vec.y, ImgWidth, ImgHeight))
-					{
-						CTurtle* turtle = (CTurtle*)base[i].get();
-						turn_anim = true;
-						anim_time = 0;
-						turtle->turn_anim = true;
-						turtle->anim_time = 0;
-					}
+				pos.x += vec.x;
+				pos.y += vec.y;
 			}
 		}
 
 		if (turn_anim)
 		{
-			if (anim_time < 10)
+			if (anim_time < 20)
 			{
 				CutX = 160;
 			}
-			else if (anim_time < 20)
+			else if (anim_time == 20)
 			{
-				if (turn)turn = false;
-				else turn = true;
+				if (turn)
+				{
+					turn = false;
+					if (level == 0)
+						vec.x = -speed;
+					else
+						vec.x = -speed * 3;
+				}
+				else
+				{
+					turn = true;
+					if (level == 0)
+						vec.x = speed;
+					else
+						vec.x = speed * 3;
+				}
 			}
-			else if (anim_time == 30)
+			else if (anim_time == 60)
 			{
 				turn_anim = false;
 				anim_time = 0;
@@ -319,7 +343,10 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 			}
 		}
 
-		if (level > 2)level = 2;
+		if (level > 2)
+		{
+			level = 2;
+		}
 
 		//起き上がり１回目
 		if (level == 1)
