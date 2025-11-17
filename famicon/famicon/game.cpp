@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Scene_Manager.h"
 #include "game.h"
+#include "result.h"
 #include "function.h"
 
 #include "player.h"
@@ -38,17 +39,37 @@ CGame::CGame(CManager* p) :CScene(p){
 int CGame::Update(){
 
 	if (Espawn_time == 0)
+	{
 		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(true));
-	else if(Espawn_time == spawn_cool)
+		turtle_num++;
+	}
+	else if (Espawn_time == spawn_cool)
+	{
 		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(false));
-	else if(Espawn_time == spawn_cool * 3)
+		turtle_num++;
+	}
+	else if (Espawn_time == spawn_cool * 3)
+	{
 		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(false));
+		turtle_num++;
+	}
 
 	Espawn_time++;
 
+	//亀がすべて倒れたらリザルトに行く
+	if (turtle_num == 0)
+	{
+		
+	}
+
 	//更新処理
 	for (int i = 0; i < base.size(); i++)
-		base[i]->Action(base);
+		switch (base[i]->Action(base))
+		{
+		case 1:
+			turtle_num--;
+			break;
+		}
 
 	//削除処理
 	for (auto i = base.begin(); i != base.end();)

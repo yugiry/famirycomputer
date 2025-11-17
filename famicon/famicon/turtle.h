@@ -23,4 +23,5 @@ public:
 	bool respawn{ false };		//上の土管に戻る判定
 	bool spawn{ false };		//スポーン
 	bool turn_anim{ false };
+	bool OnGround{ false };		//地面に乗っているか
 };

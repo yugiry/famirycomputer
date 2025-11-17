@@ -25,6 +25,7 @@ public:
 
 	int Espawn_time{ 0 };
 	int spawn_cool{ 200 };
+	int turtle_num{ 0 };
 
 	//CCamera* camera;//カメラオブジェクト
 };

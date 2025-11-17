@@ -95,6 +95,9 @@
     <ClInclude Include="pow.h">
       <Filter>ヘッダー ファイル\オブジェクト\ブロック</Filter>
     </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ヘッダー ファイル\シーン</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -135,6 +138,9 @@
     </ClCompile>
     <ClCompile Include="pow.cpp">
       <Filter>ソース ファイル\オブジェクト\ブロック</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル\シーン</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

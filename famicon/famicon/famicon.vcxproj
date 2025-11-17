@@ -167,6 +167,7 @@
     <ClInclude Include="pipe.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="pow.h" />
+    <ClInclude Include="result.h" />
     <ClInclude Include="scaf.h" />
     <ClInclude Include="Scene_Base.h" />
     <ClInclude Include="Scene_Manager.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="pipe.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="pow.cpp" />
+    <ClCompile Include="result.cpp" />
     <ClCompile Include="scaf.cpp" />
     <ClCompile Include="turtle.cpp" />
   </ItemGroup>
