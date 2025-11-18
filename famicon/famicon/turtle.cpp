@@ -231,37 +231,40 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 							//‰¡ˆÚ“®’†‚É‹T‚ÆÕ“Ë
 							if (OnGround && HitCheck_box(pos.x + vec.x, pos.y, base[i]->pos.x, base[i]->pos.y, ImgWidth, ImgHeight))
 							{
-								if (turtle->fall_down)
+								if (!turtle->kick_off)
 								{
-									turn_anim = true;
-									pos.x -= vec.x;
-									pos.y += vec.y;
-									if (turn)
+									if (turtle->fall_down)
 									{
-										pos.x = turtle->pos.x - ImgWidth;
+										turn_anim = true;
+										pos.x -= vec.x;
+										pos.y += vec.y;
+										if (turn)
+										{
+											pos.x = turtle->pos.x - ImgWidth;
+										}
+										else
+										{
+											pos.x = turtle->pos.x + turtle->ImgWidth;
+										}
 									}
 									else
 									{
-										pos.x = turtle->pos.x + turtle->ImgWidth;
-									}
-								}
-								else
-								{
-									//‹T“¯Žm‚ª•Ê‚Ì•ûŒü‚ÉŒü‚¢‚Ä‚¢‚éê‡
-									if (turn != turtle->turn)
-									{
-										turn_anim = true;
-										turtle->turn_anim = true;
-										pos.x -= vec.x;
-										pos.y += vec.y;
-										turtle->pos.x -= turtle->vec.x;
-										turtle->pos.y += turtle->vec.y;
-									}
-									//‹T“¯Žm‚ª“¯‚¶•ûŒü‚ÉŒü‚¢‚Ä‚¢‚éê‡
-									if (turn == turtle->turn)
-									{
-										turn_anim = true;
-										pos.x -= vec.x;
+										//‹T“¯Žm‚ª•Ê‚Ì•ûŒü‚ÉŒü‚¢‚Ä‚¢‚éê‡
+										if (turn != turtle->turn)
+										{
+											turn_anim = true;
+											turtle->turn_anim = true;
+											pos.x -= vec.x;
+											pos.y += vec.y;
+											turtle->pos.x -= turtle->vec.x;
+											turtle->pos.y += turtle->vec.y;
+										}
+										//‹T“¯Žm‚ª“¯‚¶•ûŒü‚ÉŒü‚¢‚Ä‚¢‚éê‡
+										if (turn == turtle->turn)
+										{
+											turn_anim = true;
+											pos.x -= vec.x;
+										}
 									}
 								}
 							}
