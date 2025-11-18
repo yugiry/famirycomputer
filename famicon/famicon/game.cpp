@@ -59,7 +59,8 @@ int CGame::Update(){
 	//亀がすべて倒れたらリザルトに行く
 	if (turtle_num == 0)
 	{
-		
+		manager->Scene_Delete();
+		manager->scene = new CResult(manager);
 	}
 
 	//更新処理

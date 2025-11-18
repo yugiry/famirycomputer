@@ -18,3 +18,8 @@ void CResult::Draw()
 {
 
 }
+
+CResult::~CResult()
+{
+
+}
