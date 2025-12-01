@@ -12,7 +12,7 @@ public:
 	CScene* scene{ nullptr };
 
 	//シーン更新
-	int Update() { scene->Update(); return 0; };
+	int Update() { return scene->Update(); };
 	//シーン描画
 	void Draw() { scene->Draw(); };
 

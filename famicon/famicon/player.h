@@ -23,4 +23,6 @@ public:
 
 	bool death{ false };
 	int fall_time{ 0 };
+
+	int HP{ 0 };
 };

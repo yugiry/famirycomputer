@@ -41,17 +41,15 @@ int CGame::Update(){
 	if (Espawn_time == 0)
 	{
 		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(true));
-		turtle_num++;
+		turtle_num = 3;
 	}
 	else if (Espawn_time == spawn_cool)
 	{
 		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(false));
-		turtle_num++;
 	}
 	else if (Espawn_time == spawn_cool * 3)
 	{
 		base.emplace_back((unique_ptr<BaseVector>)new CTurtle(false));
-		turtle_num++;
 	}
 
 	Espawn_time++;
@@ -71,6 +69,17 @@ int CGame::Update(){
 			turtle_num--;
 			break;
 		}
+	if (turtle_num == 1)
+	{
+		for (int i = 0; i < base.size(); i++)
+		{
+			if (base[i]->ID == TURTLE)
+			{
+				CTurtle* turtle = (CTurtle*)base[i].get();
+				turtle->level += 2;
+			}
+		}
+	}
 
 	//削除処理
 	for (auto i = base.begin(); i != base.end();)
@@ -86,7 +95,7 @@ int CGame::Update(){
 void CGame::Draw()
 {
 	//オブジェクト個数
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "Object_Count = %d", base.size());
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "Object_Count = %d", base.size());
 	
 	for (int i = 0; i < base.size(); i++)
 		if(base[i]->FLAG) base[i]->Draw();

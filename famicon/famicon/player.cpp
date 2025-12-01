@@ -16,6 +16,8 @@ CPlayer::CPlayer(Point p)
 	CutX = 0;
 	CutY = 0;
 
+	HP = 3;
+
 	ID = PLAYER;
 
 	pri = 5;
@@ -188,6 +190,7 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 		if (pos.y + ImgHeight < WINDOW_HEIGHT)
 		{
 			//…‚µ‚Ô‚«‚ð”­¶
+			HP--;
 
 		}
 	}
@@ -249,6 +252,10 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 				walk_anim = 1;
 			}
 		}
+		else
+		{
+
+		}
 	}
 
 	return 0;
@@ -260,5 +267,4 @@ void CPlayer::Draw()
 		DrawRectGraph(pos.x, pos.y, CutX, CutY, ImgWidth, ImgHeight, img, true, false);
 	else
 		DrawRectGraph(pos.x, pos.y, CutX, CutY, ImgWidth, ImgHeight, img, true, true);
-	DrawFormatString(0, 20, GetColor(255, 255, 255), "%f", vec.x);
 }

@@ -46,6 +46,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE,
 	//manager->scene = new CTitle(manager);
 	manager->scene = new CGame(manager);
 
+	bool finish{ false };
 
 	//ループ
 	while (true) {
@@ -54,7 +55,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE,
 		double nextTime = GetNowCount();	//現在時間の取得
 
 		//シーンの更新と描画処理
-		manager->Update();
+		switch (manager->Update())
+		{
+		case 1:
+			finish = true;
+			break;
+		}
 		manager->Draw();
 
 		//FPS処理
@@ -67,7 +73,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE,
 		ScreenFlip();	//画面を更新
 
 		//escキーでプログラム終了
-		if (CheckHitKey(KEY_INPUT_ESCAPE) || (ProcessMessage() == -1)) break;
+		if (CheckHitKey(KEY_INPUT_ESCAPE) || (ProcessMessage() == -1) || (finish)) break;
 	}
 
 	//シーンの削除

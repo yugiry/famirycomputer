@@ -286,7 +286,31 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 				}
 			}
 
-			//向きによって移動方向を変更
+			//亀のレベルによって亀のスピードを変える
+			if (level == 1 || level == 2)
+			{
+				if (turn)
+				{
+					vec.x = speed * 3;
+				}
+				else
+				{
+					vec.x = -speed * 3;
+				}
+			}
+			else
+			{
+				if (turn)
+				{
+					vec.x = speed;
+				}
+				else
+				{
+					vec.x = -speed;
+				}
+			}
+
+			//転ぶもしくは向きが変わるアニメーション以外は動く
 			if (!turn_anim)
 			{
 				pos.x += vec.x;
