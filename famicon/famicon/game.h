@@ -27,5 +27,7 @@ public:
 	int spawn_cool{ 200 };
 	int turtle_num{ 0 };
 
+	bool game_end{ false };
+
 	//CCamera* camera;//カメラオブジェクト
 };

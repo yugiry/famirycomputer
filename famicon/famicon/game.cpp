@@ -68,6 +68,9 @@ int CGame::Update(){
 		case 1:
 			turtle_num--;
 			break;
+		case 2:
+			game_end = true;
+			break;
 		}
 	if (turtle_num == 1)
 	{
@@ -79,6 +82,11 @@ int CGame::Update(){
 				turtle->level += 2;
 			}
 		}
+	}
+
+	if (game_end)
+	{
+
 	}
 
 	//íœˆ—

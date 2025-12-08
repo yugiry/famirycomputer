@@ -9,6 +9,7 @@ CPlayer::CPlayer(Point p)
 	pos = p;
 
 	img = LoadGraph("image\\player.png");
+	respawn_img = LoadGraph("image\\respawn.png");
 	
 	ImgWidth = 32;
 	ImgHeight = 48;
@@ -26,172 +27,194 @@ CPlayer::CPlayer(Point p)
 int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 {
 
-	if (!death)
+	if (respawn)
 	{
-		//AキーとDキーが押されていないかつ地面に足がついている場合
-		//xベクトルと歩くアニメーションを０にする
-		if (!CheckHitKey(KEY_INPUT_A) && !CheckHitKey(KEY_INPUT_D) && OnGround)
+		if (pos.y < 20)
 		{
-			walk_anim = 0;
-
-			if (vec.x > 0)
+			pos.y += 2.0f;
+			CutX = CutY = 0;
+		}
+		else if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D) || CheckHitKey(KEY_INPUT_SPACE))
+		{
+			respawn = false;
+		}
+	}
+	else
+	{
+		if (!death)
+		{
+			//AキーとDキーが押されていないかつ地面に足がついている場合
+			//xベクトルと歩くアニメーションを０にする
+			if (!CheckHitKey(KEY_INPUT_A) && !CheckHitKey(KEY_INPUT_D) && OnGround)
 			{
+				walk_anim = 0;
+
+				if (vec.x > 0)
+				{
+					vec.x += -add_speed;
+					CutX = 0;
+					CutY = 48;
+				}
+				if (vec.x < 0)
+				{
+					vec.x += add_speed;
+					CutX = 0;
+					CutY = 48;
+				}
+			}
+			vec.y += g;
+
+			//移動
+			if (CheckHitKey(KEY_INPUT_A) && OnGround)
+			{
+				if (vec.x > 0)
+				{
+					CutX = 0;
+					CutY = 48;
+					walk_anim = 0;
+				}
 				vec.x += -add_speed;
-				CutX = 0;
-				CutY = 48;
 			}
-			if (vec.x < 0)
+			if (CheckHitKey(KEY_INPUT_D) && OnGround)
 			{
+				if (vec.x < 0)
+				{
+					CutX = 0;
+					CutY = 48;
+					walk_anim = 0;
+				}
 				vec.x += add_speed;
-				CutX = 0;
-				CutY = 48;
 			}
-		}
-		vec.y += g;
 
-		//移動
-		if (CheckHitKey(KEY_INPUT_A) && OnGround)
-		{
-			if (vec.x > 0)
+			//AキーもしくはDキーが押されているとアニメーションを動かす
+			if ((CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D)) && OnGround)
 			{
-				CutX = 0;
-				CutY = 48;
-				walk_anim = 0;
+				walk_anim++;
 			}
-			vec.x += -add_speed;
-		}
-		if (CheckHitKey(KEY_INPUT_D) && OnGround)
-		{
-			if (vec.x < 0)
+
+			//移動速度が"SPEED"以上にならないようにする
+			if (vec.x < -SPEED)vec.x = -SPEED;
+			if (vec.x > SPEED)vec.x = SPEED;
+
+			//ジャンプ
+			if (CheckHitKey(KEY_INPUT_SPACE) && !Jump && OnGround)
 			{
-				CutX = 0;
-				CutY = 48;
-				walk_anim = 0;
+				vec.y -= 11.0f;
 			}
-			vec.x += add_speed;
-		}
+			Jump = CheckHitKey(KEY_INPUT_SPACE);
 
-		//AキーもしくはDキーが押されているとアニメーションを動かす
-		if ((CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D)) && OnGround)
-		{
-			walk_anim++;
-		}
+			OnGround = false;
 
-		//移動速度が"SPEED"以上にならないようにする
-		if (vec.x < -SPEED)vec.x = -SPEED;
-		if (vec.x > SPEED)vec.x = SPEED;
-
-		//ジャンプ
-		if (CheckHitKey(KEY_INPUT_SPACE) && !Jump && OnGround)
-		{
-			vec.y -= 11.0f;
-		}
-		Jump = CheckHitKey(KEY_INPUT_SPACE);
-
-		OnGround = false;
-
-		//ブロックとの当たり判定
-		Point latepos{ pos.x + vec.x,pos.y + vec.y };
-		for (auto i = base.begin(); i != base.end(); i++)
-		{
-			if ((*i)->ID == GROUND)
+			//ブロックとの当たり判定
+			Point latepos{ pos.x + vec.x,pos.y + vec.y };
+			for (auto i = base.begin(); i != base.end(); i++)
 			{
-				if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5))
+				if ((*i)->ID == GROUND)
 				{
-					vec.y = 0;
-					pos.y = (*i)->pos.y - ImgHeight;
-					OnGround = true;
-					break;
-				}
-			}
-			if ((*i)->ID == SCAF)
-			{
-				if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y > 0)
-				{
-					vec.y = 0;
-					pos.y = (*i)->pos.y - ImgHeight;
-					OnGround = true;
-					break;
-				}
-				//下から叩かれた時
-				if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y + (*i)->ImgWidth - 10, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y < 0)
-				{
-					vec.y = -0.5f;
-					(*i)->vec.y = -2.5f;
-				}
-			}
-			if ((*i)->ID == POW)
-			{
-				if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y > 0)
-				{
-					vec.y = 0;
-					pos.y = (*i)->pos.y - ImgHeight;
-					OnGround = true;
-					break;
-				}
-				if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y + (*i)->ImgWidth - 10, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y < 0)
-				{
-					CPow* pow = (CPow*)(*i).get();
-					pow->plosion_time--;
-					vec.y = 0;
-					for (int j = 0; j < base.size(); j++)
+					if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5))
 					{
-						if (base[j]->ID == TURTLE)
+						vec.y = 0;
+						pos.y = (*i)->pos.y - ImgHeight;
+						OnGround = true;
+						break;
+					}
+				}
+				if ((*i)->ID == SCAF)
+				{
+					if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y > 0)
+					{
+						vec.y = 0;
+						pos.y = (*i)->pos.y - ImgHeight;
+						OnGround = true;
+						break;
+					}
+					//下から叩かれた時
+					if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y + (*i)->ImgWidth - 10, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y < 0)
+					{
+						vec.y = -0.5f;
+						(*i)->vec.y = -2.5f;
+					}
+				}
+				if ((*i)->ID == POW)
+				{
+					if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y > 0)
+					{
+						vec.y = 0;
+						pos.y = (*i)->pos.y - ImgHeight;
+						OnGround = true;
+						break;
+					}
+					if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y + (*i)->ImgWidth - 10, ImgWidth, 10, (*i)->ImgWidth, 5) && vec.y < 0)
+					{
+						CPow* pow = (CPow*)(*i).get();
+						pow->plosion_time--;
+						vec.y = 0;
+						for (int j = 0; j < base.size(); j++)
 						{
-							CTurtle* turtle = (CTurtle*)base[j].get();
-							turtle->fall_down = true;
-							turtle->vec.y = -7.0f;
-							turtle->vec.x = 0;
+							if (base[j]->ID == TURTLE)
+							{
+								CTurtle* turtle = (CTurtle*)base[j].get();
+								turtle->fall_down = true;
+								turtle->vec.y = -7.0f;
+								turtle->vec.x = 0;
+							}
+						}
+					}
+				}
+			}
+
+			//敵との当たり判定
+			for (auto i = base.begin(); i != base.end(); i++)
+			{
+				if ((*i)->ID == TURTLE)
+				{
+					if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y, ImgWidth, ImgHeight, (*i)->ImgWidth, (*i)->ImgHeight))
+					{
+						CTurtle* turtle = (CTurtle*)(*i).get();
+						if (!turtle->fall_down)
+						{
+							death = true;
+							CutX = 64;
+							CutY = 48;
+							vec.x = 0;
+							vec.y = 0;
+							fall_time = 30;
+							break;
+						}
+						else if (!turtle->kick_off)
+						{
+							(*i)->vec.x = vec.x;
+							(*i)->vec.y = -8.0f;
+							turtle->kick_off = true;
 						}
 					}
 				}
 			}
 		}
-
-		//敵との当たり判定
-		for (auto i = base.begin(); i != base.end(); i++)
+		else
 		{
-			if ((*i)->ID == TURTLE)
+			if (fall_time != 0)fall_time--;
+			if (fall_time == 1)
 			{
-				if (HitCheck_box(pos.x, pos.y, (*i)->pos.x, (*i)->pos.y, ImgWidth, ImgHeight, (*i)->ImgWidth, (*i)->ImgHeight))
-				{
-					CTurtle* turtle = (CTurtle*)(*i).get();
-					if (!turtle->fall_down)
-					{
-						death = true;
-						CutX = 64;
-						CutY = 48;
-						vec.x = 0;
-						vec.y = 0;
-						fall_time = 30;
-						break;
-					}
-					else if(!turtle->kick_off)
-					{
-						(*i)->vec.x = vec.x;
-						(*i)->vec.y = -8.0f;
-						turtle->kick_off = true;
-					}
-				}
+				vec.y = -8.0f;
+				CutX = 96;
+				CutY = 48;
 			}
-		}
-	}
-	else
-	{
-		if (fall_time != 0)fall_time--;
-		if (fall_time == 1)
-		{
-			vec.y = -8.0f;
-			CutX = 96;
-			CutY = 48;
-		}
-		if (fall_time == 0)vec.y += g;
+			if (fall_time == 0)vec.y += g;
 
-		if (pos.y + ImgHeight < WINDOW_HEIGHT)
-		{
-			//水しぶきを発生
-			HP--;
+			if (drop)
+			{
+				vec.y = 0;
+				drop_anim++;
+			}
 
+			if (pos.y + ImgHeight > WINDOW_HEIGHT)
+			{
+				//水しぶきを発生
+				HP--;
+				drop = true;
+				vec.y = 0;
+			}
 		}
 	}
 
@@ -206,8 +229,11 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 	}
 
 	//移動処理
-	pos.x += vec.x;
-	pos.y += vec.y;
+	if (!respawn)
+	{
+		pos.x += vec.x;
+		pos.y += vec.y;
+	}
 
 	//移動ベクトルによってプレイヤーの向きを変更
 	if (vec.x < 0)
@@ -252,10 +278,45 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 				walk_anim = 1;
 			}
 		}
-		else
+		else if (drop && !respawn)
 		{
-
+			CutY = 96;
+			pos.y = WINDOW_HEIGHT - ImgHeight;
+			if (drop_anim == 0)
+			{
+				CutX = 0;
+			}
+			if (drop_anim == 2)
+			{
+				CutX = 32;
+			}
+			if (drop_anim == 5)
+			{
+				CutX = 64;
+			}
+			if (drop_anim == 7)
+			{
+				CutX = 96;
+			}
+			if (drop_anim >= 9)
+			{
+				pos.y = -ImgHeight;
+				CutX = CutY = 0;
+			}
+			if (drop_anim == 30)
+			{
+				pos.x = 160;
+				respawn = true;
+				drop = death = false;
+				drop_anim = 0;
+				direction = false;
+			}
 		}
+	}
+
+	if (HP == 0)
+	{
+		return 2;
 	}
 
 	return 0;
@@ -267,4 +328,9 @@ void CPlayer::Draw()
 		DrawRectGraph(pos.x, pos.y, CutX, CutY, ImgWidth, ImgHeight, img, true, false);
 	else
 		DrawRectGraph(pos.x, pos.y, CutX, CutY, ImgWidth, ImgHeight, img, true, true);
+
+	if (respawn)
+	{
+		DrawGraph(pos.x, pos.y + ImgHeight, respawn_img, true);
+	}
 }
