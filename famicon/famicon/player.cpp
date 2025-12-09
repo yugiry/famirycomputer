@@ -10,6 +10,7 @@ CPlayer::CPlayer(Point p)
 
 	img = LoadGraph("image\\player.png");
 	respawn_img = LoadGraph("image\\respawn.png");
+	hp_img = LoadGraph("image\\hp.png");
 	
 	ImgWidth = 32;
 	ImgHeight = 48;
@@ -32,7 +33,7 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 		if (pos.y < 20)
 		{
 			pos.y += 2.0f;
-			CutX = CutY = 0;
+			CutX = 0; CutY = 0;
 		}
 		else if (CheckHitKey(KEY_INPUT_A) || CheckHitKey(KEY_INPUT_D) || CheckHitKey(KEY_INPUT_SPACE))
 		{
@@ -314,6 +315,12 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base)
 		}
 	}
 
+	if (respawn)
+	{
+		CutX = 0;
+		CutY = 0;
+	}
+
 	if (HP == 0)
 	{
 		return 2;
@@ -332,5 +339,11 @@ void CPlayer::Draw()
 	if (respawn)
 	{
 		DrawGraph(pos.x, pos.y + ImgHeight, respawn_img, true);
+	}
+
+	for (int i = 0; i < HP; i++)
+	{
+
+		DrawGraph(150 + i * 25, 10, hp_img, true);
 	}
 }

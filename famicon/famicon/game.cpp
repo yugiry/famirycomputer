@@ -86,7 +86,8 @@ int CGame::Update(){
 
 	if (game_end)
 	{
-
+		manager->Scene_Delete();
+		manager->scene = new CResult(manager);
 	}
 
 	//íœˆ—

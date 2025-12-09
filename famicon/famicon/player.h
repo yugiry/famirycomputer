@@ -10,6 +10,7 @@ public:
 	void Draw();
 
 	int respawn_img{ -1 };
+	int hp_img{ -1 };
 
 	float add_speed{ 0.25f };
 	float SPEED{ 2.0f };

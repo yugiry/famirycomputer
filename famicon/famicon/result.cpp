@@ -20,7 +20,9 @@ int CResult::Update() {
 
 void CResult::Draw()
 {
-
+	SetFontSize(30);
+	DrawString(WINDOW_WIDTH / 2 -80, WINDOW_HEIGHT / 2, "GAME CLEAR", GetColor(255, 255, 255));
+	SetFontSize(10);
 }
 
 CResult::~CResult()

@@ -36,6 +36,11 @@ CTurtle::CTurtle(bool _turn)
 
 int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 {
+	if (level > 2)
+	{
+		level = 2;
+	}
+
 	if (spawn)
 	{
 		anim_time++;
@@ -405,11 +410,6 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 					anim_time = 0;
 				}
 			}
-		}
-
-		if (level > 2)
-		{
-			level = 2;
 		}
 
 		//‹N‚«ã‚ª‚è‚P‰ñ–Ú
