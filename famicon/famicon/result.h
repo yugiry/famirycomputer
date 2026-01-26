@@ -21,5 +21,7 @@ public:
 	int Update();//更新処理
 	void Draw();//描画処理
 
+	bool push{ false };
+
 	//CCamera* camera;//カメラオブジェクト
 };

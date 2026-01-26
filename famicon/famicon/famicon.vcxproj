@@ -171,6 +171,7 @@
     <ClInclude Include="scaf.h" />
     <ClInclude Include="Scene_Base.h" />
     <ClInclude Include="Scene_Manager.h" />
+    <ClInclude Include="title.h" />
     <ClInclude Include="turtle.h" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +188,7 @@
     <ClCompile Include="pow.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="scaf.cpp" />
+    <ClCompile Include="title.cpp" />
     <ClCompile Include="turtle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

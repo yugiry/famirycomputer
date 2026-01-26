@@ -3,8 +3,8 @@
 #pragma once
 #include "main.h"
 #include "Scene_Manager.h"
-//#include "Title.h"
-#include "game.h"
+#include "title.h"
+//#include "game.h"
 
 constexpr auto FPS = 60;//Šî–{FPS
 
@@ -44,7 +44,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE,
 
 	//‰‰ñƒV[ƒ“‚Ì¶¬
 	//manager->scene = new CTitle(manager);
-	manager->scene = new CGame(manager);
+	manager->scene = new CTitle(manager);
 
 	bool finish{ false };
 
@@ -58,7 +58,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE,
 		switch (manager->Update())
 		{
 		case 1:
-			finish = true;
+			//finish = true;
+			
 			break;
 		}
 		manager->Draw();

@@ -5,15 +5,16 @@
 #include "function.h"
 
 CResult::CResult(CManager* p) :CScene(p) {
-
+	push = true;
 }
 
 int CResult::Update() {
 
-	if (CheckHitKeyAll())
+	if (CheckHitKeyAll() && !push)
 	{
 		return 1;
 	}
+	push = CheckHitKeyAll();
 
 	return 0;
 }
