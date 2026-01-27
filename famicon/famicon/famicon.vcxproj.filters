@@ -101,6 +101,9 @@
     <ClInclude Include="title.h">
       <Filter>ヘッダー ファイル\シーン</Filter>
     </ClInclude>
+    <ClInclude Include="coin.h">
+      <Filter>ヘッダー ファイル\オブジェクト\敵</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -147,6 +150,9 @@
     </ClCompile>
     <ClCompile Include="title.cpp">
       <Filter>ソース ファイル\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="coin.cpp">
+      <Filter>ソース ファイル\オブジェクト\敵</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

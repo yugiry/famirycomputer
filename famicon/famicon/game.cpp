@@ -10,6 +10,7 @@
 #include "turtle.h"
 #include "pipe.h"
 #include "pow.h"
+#include "coin.h"
 
 //コンストラクタ
 CGame::CGame(CManager* p) :CScene(p){
@@ -33,6 +34,8 @@ CGame::CGame(CManager* p) :CScene(p){
 		pos.x = WINDOW_WIDTH - 112;
 		base.emplace_back((unique_ptr<BaseVector>)new CPipe(pos, 3));
 	}
+
+	base.emplace_back((unique_ptr<BaseVector>)new CCoin(false));
 }
 
 //更新処理
@@ -70,6 +73,8 @@ int CGame::Update(){
 			break;
 		case 2:
 			game_end = true;
+			break;
+		case 3:
 			break;
 		}
 	if (turtle_num == 1)

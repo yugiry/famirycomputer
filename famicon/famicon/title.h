@@ -20,7 +20,15 @@ public:
 	int selector_img{ -1 };
 	bool push{ false };
 
-	Point selector_pos;
+	int point{ 0 };
+
+	Point selector_pos[4] =
+	{
+		{104,240},
+		{104,272},
+		{104,304},
+		{104,336}
+	};
 
 	//104,240
 	//272

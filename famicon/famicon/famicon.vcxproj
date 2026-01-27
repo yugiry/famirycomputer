@@ -37,7 +37,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -156,6 +156,7 @@
     <ClInclude Include="3D_function.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="2D_function.h" />
+    <ClInclude Include="coin.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="ground.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="3D_function.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="2D_function.cpp" />
+    <ClCompile Include="coin.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="ground.cpp" />
     <ClCompile Include="library_function.cpp" />

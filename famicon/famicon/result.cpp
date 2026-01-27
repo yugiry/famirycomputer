@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Scene_Manager.h"
 #include "result.h"
+#include "title.h"
 #include "function.h"
 
 CResult::CResult(CManager* p) :CScene(p) {
@@ -12,7 +13,8 @@ int CResult::Update() {
 
 	if (CheckHitKeyAll() && !push)
 	{
-		return 1;
+		manager->Scene_Delete();
+		manager->scene = new CTitle(manager);
 	}
 	push = CheckHitKeyAll();
 

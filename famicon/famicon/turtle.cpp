@@ -171,7 +171,7 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 				{
 					if ((*i)->ID == GROUND)
 					{
-						if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5))
+						if (HitCheck_box(latepos.x, latepos.y + ImgHeight / 2, (*i)->pos.x, (*i)->pos.y, ImgWidth, ImgHeight / 2, (*i)->ImgWidth, 5))
 						{
 							vec.y = 0;
 							pos.y = (*i)->pos.y - ImgHeight;
@@ -181,7 +181,7 @@ int CTurtle::Action(vector<unique_ptr<BaseVector>>& base)
 					}
 					if ((*i)->ID == SCAF)
 					{
-						if (HitCheck_box(latepos.x, latepos.y + ImgHeight - 10, (*i)->pos.x, (*i)->pos.y, ImgWidth, 10, (*i)->ImgWidth, 5))
+						if (HitCheck_box(latepos.x, latepos.y + ImgHeight / 2, (*i)->pos.x, (*i)->pos.y, ImgWidth, ImgHeight / 2, (*i)->ImgWidth, 5))
 						{
 							if ((*i)->vec.y != 0.0f)
 							{
