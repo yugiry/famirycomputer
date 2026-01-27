@@ -2,28 +2,33 @@
 #include "DxLib.h"
 #include "Scene_Manager.h"
 #include "title.h"
+#include "game.h"
 #include "function.h"
 
 CTitle::CTitle(CManager* p) :CScene(p) {
+	title_img = LoadGraph("image\\title.png");
+	selector_img = LoadGraph("image\\selector.png");
 	push = true;
+
+	selector_pos = { 104,240 };
 }
 
 int CTitle::Update() {
 
-	if (CheckHitKeyAll() && !push)
+	//ƒQ[ƒ€‚ÉˆÚ“®
+	if (CheckHitKey(KEY_INPUT_RETURN))
 	{
-		return 1;
+		manager->Scene_Delete();
+		manager->scene = new CGame(manager);
 	}
-	push = CheckHitKeyAll();
 
 	return 0;
 }
 
 void CTitle::Draw()
 {
-	SetFontSize(30);
-	DrawString(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2, "GAME CLEAR", GetColor(255, 255, 255));
-	SetFontSize(10);
+	DrawGraph(0, 0, title_img, true);
+	DrawGraph(selector_pos.x, selector_pos.y, selector_img, true);
 }
 
 CTitle::~CTitle()

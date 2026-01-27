@@ -55,13 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE,
 		double nextTime = GetNowCount();	//現在時間の取得
 
 		//シーンの更新と描画処理
-		switch (manager->Update())
-		{
-		case 1:
-			//finish = true;
-			
-			break;
-		}
+		manager->Update();
 		manager->Draw();
 
 		//FPS処理
