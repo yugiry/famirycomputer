@@ -13,7 +13,7 @@ public:
 	vector<unique_ptr<BaseVector>> base;
 
 	//コンストラクタ
-	CResult(CManager*);
+	CResult(CManager*, bool);
 
 	//デストラクタ
 	~CResult();
@@ -22,6 +22,7 @@ public:
 	void Draw();//描画処理
 
 	bool push{ false };
+	bool clear{ false };
 
 	//CCamera* camera;//カメラオブジェクト
 };

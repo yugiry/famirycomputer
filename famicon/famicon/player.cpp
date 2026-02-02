@@ -341,9 +341,8 @@ void CPlayer::Draw()
 		DrawGraph(pos.x, pos.y + ImgHeight, respawn_img, true);
 	}
 
-	for (int i = 0; i < HP; i++)
+	for (int i = 0; i < HP - 1; i++)
 	{
-
 		DrawGraph(150 + i * 25, 10, hp_img, true);
 	}
 }

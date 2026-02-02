@@ -11,6 +11,8 @@ CCoin::CCoin(bool _turn)
 
 	ImgWidth = 16;
 	ImgHeight = 32;
+
+	in_pipe = false;
 }
 
 int CCoin::Action(vector<unique_ptr<BaseVector>>& base)
@@ -52,6 +54,11 @@ int CCoin::Action(vector<unique_ptr<BaseVector>>& base)
 					break;
 				}
 			}
+		}
+
+		latepos = { pos.x + vec.x ,pos.y };
+		for (auto i = 0; i < base.size(); i++)
+		{
 			if (base[i]->ID == PLAYER)
 			{
 				if (HitCheck_box(latepos.x, latepos.y, base[i]->pos.x, base[i]->pos.y, ImgWidth, ImgHeight, base[i]->ImgWidth, base[i]->ImgHeight))

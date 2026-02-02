@@ -60,8 +60,8 @@ int CGame::Update(){
 	//亀がすべて倒れたらリザルトに行く
 	if (turtle_num == 0)
 	{
-		manager->Scene_Delete();
-		manager->scene = new CResult(manager);
+		game_end = true;
+		clear = true;
 	}
 
 	//更新処理
@@ -73,8 +73,7 @@ int CGame::Update(){
 			break;
 		case 2:
 			game_end = true;
-			break;
-		case 3:
+			clear = false;
 			break;
 		}
 	if (turtle_num == 1)
@@ -92,7 +91,7 @@ int CGame::Update(){
 	if (game_end)
 	{
 		manager->Scene_Delete();
-		manager->scene = new CResult(manager);
+		manager->scene = new CResult(manager, clear);
 	}
 
 	//削除処理

@@ -5,8 +5,9 @@
 #include "title.h"
 #include "function.h"
 
-CResult::CResult(CManager* p) :CScene(p) {
+CResult::CResult(CManager* p, bool _clear) :CScene(p) {
 	push = true;
+	clear = _clear;
 }
 
 int CResult::Update() {
@@ -24,7 +25,12 @@ int CResult::Update() {
 void CResult::Draw()
 {
 	SetFontSize(30);
-	DrawString(WINDOW_WIDTH / 2 -80, WINDOW_HEIGHT / 2, "GAME CLEAR", GetColor(255, 255, 255));
+	if (clear)
+		DrawString(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2, "GAME CLEAR", GetColor(255, 255, 255));
+	else
+		DrawString(WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT / 2, "GAME OVER", GetColor(255, 255, 255));
+	SetFontSize(20);
+	DrawString(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 + 30, "RETURN TITLEÅFPUSH ANY KEY", GetColor(255, 255, 255));
 	SetFontSize(10);
 }
 

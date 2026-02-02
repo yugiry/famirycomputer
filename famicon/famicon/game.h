@@ -28,6 +28,7 @@ public:
 	int turtle_num{ 0 };
 
 	bool game_end{ false };
+	bool clear{ false };
 
 	//CCamera* camera;//カメラオブジェクト
 };
